@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEquipoStore, useForm } from "../../../../hooks";
 import '../../pages/ContenidoPages.css';
 
@@ -7,11 +7,13 @@ const equipoInitialValue = {
   equipoImagen: null
 };
 
-export const AgregarEquipo = () => {
+export const ActualizarEquipo = () => {
 
-  const { equipoNombre, equipoImagen, onInputChange, onResetForm } = useForm(equipoInitialValue);
+  const { equipoNombre, equipoImagen, onInputChange } = useForm(equipoInitialValue);
 
-  const { startAddNewTeam } = useEquipoStore();
+  const { startUpdateTeam } = useEquipoStore();
+
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -21,24 +23,24 @@ export const AgregarEquipo = () => {
 
   const onForm = (e) => {
     e.preventDefault();
-    startAddNewTeam({nombre: equipoNombre, imagen: equipoImagen});
+    startUpdateTeam({id: id, nombre: equipoNombre, imagen: equipoImagen});
   };
 
   const onHandleFile = (e) => {
     const file = e.target.files[0];
-    onInputChange({ target: { name: 'equipoImagen', value: file } });
+    onInputChange({ target: { name: 'equipoImagen', value: file } });   
   };
-
+  
   return (
     <div id ="Contenido">
       <div className="container">
         <div className="row p-3">
-          <form onSubmit={onForm}>
+          <form onSubmit={onForm} encType="multipart/form-data">
             <div className="d-flex justify-content-between">
               <div onClick={onNavigateBack}>
                 <i className="fa-solid fa-arrow-left btn btn-primary"></i>
               </div>
-              <h3 className="text-center">REGISTRA UN NUEVO EQUIPO</h3>
+              <h3 className="text-center">ACTUALIZA EQUIPO: </h3>
               <div></div>
             </div>
             <div className="form-group mb-2">
@@ -51,7 +53,6 @@ export const AgregarEquipo = () => {
                 minLength={5}
                 value={equipoNombre}
                 onChange={onInputChange}
-                required
               />
             </div>
 
@@ -70,20 +71,10 @@ export const AgregarEquipo = () => {
               <input
                 type="submit"
                 className="btnSubmit"
-                value="Crear Equipo"
+                value="Actualizar"
               />
             </div>
             
-            <div className="form-group mb-2 text-center ">
-              <input
-                  type="submit"
-                  className="btnSubmit"
-                  value="Limpiar"
-                  onClick={onResetForm}
-                  style={{ background: 'gray'}}
-              />
-            </div>
-
           </form>
         </div>
       </div>

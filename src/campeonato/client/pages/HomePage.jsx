@@ -3,6 +3,8 @@ import { useEquipoStore, useEstadisticaStore, useJugadorStore, useResultadoStore
 import { Banner } from "../../components/Banner"
 import { CampeonatoNavbar } from "../../components/CampeonatoNavbar"
 import { useEffect } from "react";
+import { GoleadoresPage } from "./GoleadoresPage";
+import { TablaPage } from "./TablaPage";
 
 export const HomePage = () => {
 
@@ -26,8 +28,14 @@ export const HomePage = () => {
   return (
     <>
         <CampeonatoNavbar/>
-        <Banner/>
-        <h1>HomePage</h1>
+        <div id="ContenedorPrincipal">
+          <div></div>
+
+
+
+          <TablaPage/>
+          <GoleadoresPage/>
+        </div>
     </>
   )
 }

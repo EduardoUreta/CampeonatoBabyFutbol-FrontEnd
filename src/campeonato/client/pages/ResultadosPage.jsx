@@ -21,6 +21,12 @@ export const ResultadosPage = () => {
         startLoadTeams();
         startLoadStats();
         startLoadPlayers();
+
+        window.AOS.init({
+            duration: 2000,
+            easing: 'ease-in-out',
+        });
+
     }, []);
 
     const onHandleActiveTeams = ([equipoUno, equipoDos]) => {
@@ -42,7 +48,7 @@ export const ResultadosPage = () => {
                 <div className="container">
                     <h1 className="text-center p-3" style={{ fontFamily: 'campus' }}>RESULTADOS</h1>
                     {resultados.length !== 0 ? (
-                        resultadosOrdenados.map((resultado) => {
+                        resultadosOrdenados.map((resultado, index) => {
                             const equipoUno = equipos.find(equipo => equipo.id === resultado.equipo_uno);
                             const equipoDos = equipos.find(equipo => equipo.id === resultado.equipo_dos);
 
@@ -72,7 +78,7 @@ export const ResultadosPage = () => {
                                 });
 
                             return (
-                                <div key={resultado.id} className="row p-3">
+                                <div key={resultado.id} className="row p-3" data-aos="fade-up" data-aos-delay={index*100} >
                                     <div className="col-lg-12 col-md-12 col-sm-12 mx-auto mb-4">
                                         <div className="card shadow-lg border-0 rounded-4 p-4">
                                             <div className="d-flex flex-column flex-md-row justify-content-around align-items-center text-center">

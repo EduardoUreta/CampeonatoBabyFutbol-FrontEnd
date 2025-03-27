@@ -5,6 +5,7 @@ import { useAuthStore } from "../hooks"
 import { useEffect } from "react"
 import { Spinner } from 'react-bootstrap';
 import { LoginPage } from "../auth/LoginPage"
+import { GoleadoresPage } from "../campeonato/client/pages/GoleadoresPage"
 
 
 export const CampeonatoRouter = () => {

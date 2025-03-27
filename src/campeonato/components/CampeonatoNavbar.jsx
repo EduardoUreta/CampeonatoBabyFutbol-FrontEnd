@@ -28,10 +28,6 @@ export const CampeonatoNavbar = () => {
             <NavLink className={({isActive}) => `nav-item nav-link ${isActive ? 'active' : ''}`} to="/resultados" >
               Resultados
             </NavLink>
-            <NavDropdown title="Estadísticas" id="collapsible-nav-dropdown" className='text-light'>
-              <NavDropdown.Item to="/tabla">Tabla</NavDropdown.Item>
-              <NavDropdown.Item to="/goleadores">Goleadores</NavDropdown.Item>
-            </NavDropdown>
           </Nav>
           <Nav>
 

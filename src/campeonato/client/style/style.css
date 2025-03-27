@@ -1,0 +1,172 @@
+#ContenedorPrincipal {
+    background-image: url('../img/fondoFutbol.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 600px;
+    justify-content: center; 
+    align-items: center;  
+    color: white;
+}
+
+#ContenedorPrincipal .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+#ContenedorPrincipal .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo general de la tabla */
+.custom-futuristic-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    position: relative;
+    background: linear-gradient(45deg, #000000, #ffffff);
+    border-radius: 15px;
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: pulse 2s infinite alternate;
+  }
+  
+  /* Cabecera futurista */
+  .custom-futuristic-table thead {
+    background: linear-gradient(45deg, #1a1a1a, #3a3a3a);
+    color: #ffcc00;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-futuristic-table th {
+    padding: 10px 20px;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #ffcc00;
+    position: relative;
+  }
+  
+  .custom-futuristic-table th::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 3px;
+    background: #ffcc00;
+    border-radius: 5px;
+  }
+  
+  /* Celdas con bordes sutiles y fondo iluminado */
+  .custom-futuristic-table td {
+    padding: 18px 25px;
+    font-size: 1.1rem;
+    color: #ffcc00;
+    text-align: center;
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 1);  /* Fondo negro para tbody */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  .custom-futuristic-table td::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, transparent, #ff0099, #6600cc);
+    background-size: 200% 200%;
+    border-radius: 10px;
+    z-index: -1;
+    animation: gradient-animation 5s ease-in-out infinite;
+  }
+  
+  /* Efecto hover radical en las filas con amarillo y rojo */
+  .custom-futuristic-table tbody tr:hover {
+    background-color: #b6b6b6;  /* Plateado oscuro */
+    color: #ffcc00;  /* Letra amarilla */
+    border-color: #ff3d00;  /* Bordes en rojo */
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.5);
+    transform: translateY(-5px);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .custom-futuristic-table tbody tr:hover td {
+    color: #ff3d00;  /* Letras en rojo cuando hover */
+    background: linear-gradient(90deg, #003366, #3399ff); /* Azul oscuro a verde oscuro */
+    color: white;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);  /* Añadir un pequeño resplandor */
+    transition: background 0.5s ease-in-out;
+  }
+  
+  /* Alternancia de fondo para filas con animación */
+  .custom-futuristic-table tbody tr:nth-child(odd) td {
+    background-color: rgba(0, 0, 0, 1);
+  }
+  
+  .custom-futuristic-table tbody tr:nth-child(even) td {
+    background-color: rgba(0, 0, 0, 1);
+  }
+  
+  /* Estilo para cambio de colores de izquierda a derecha cuando hover */
+  .custom-futuristic-table tbody tr {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .custom-futuristic-table tbody tr::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s ease-in-out;
+    z-index: -1;
+  }
+  
+  .custom-futuristic-table tbody tr:hover::after {
+    left: 0; /* El gradiente se moverá de izquierda a derecha */
+  }
+  
+  /* Animación de brillo para la tabla */
+  @keyframes pulse {
+    0% {
+      box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.4);
+    }
+    100% {
+      box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  /* Animación de gradientes (flujo) */
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Estilo para texto centrado */
+  .custom-futuristic-table .text-center {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffcc00;
+  }
+  

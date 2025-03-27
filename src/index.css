@@ -87,3 +87,18 @@ button:focus-visible {
   background-color: #004085;
   transform: translateY(2px);
 }
+
+@font-face {
+  font-family: 'Campus';
+  src: url('./assets/fonts/campus.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pitcher';
+  src: url('./assets/fonts/pitcher.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+

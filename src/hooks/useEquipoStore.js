@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { getEnvVariables } from "../helpers"
 import Swal from "sweetalert2";
-import { onAddNewTeam, onLoadOneTeam, onLoadTeams, onUpdateTeam } from "../store/equipo/equipoSlice";
+import { onAddNewTeam, onLoadOneTeam, onLoadTeams, onSetActiveTeam, onUpdateTeam } from "../store/equipo/equipoSlice";
 
 const { VITE_API_URL } = getEnvVariables();
 
@@ -139,12 +139,17 @@ export const useEquipoStore = () => {
     }
   };
 
+  const startActiveTeam = async(team) => {
+    dispatch(onSetActiveTeam(team));
+  }
+
 
   return {
     startAddNewTeam,
     startLoadTeams,
     startLoadOneTeam,
     startUpdateTeam,
-    startDeleteTeam
+    startDeleteTeam,
+    startActiveTeam
   }
 }

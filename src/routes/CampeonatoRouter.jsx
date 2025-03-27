@@ -1,10 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom"
-import { HomePage } from "../campeonato/pages/HomePage"
+import { HomePage, EquiposPage, JugadoresPage, ResultadosPage } from "../campeonato/client/pages/index"
 import { AdminPage } from "../campeonato/admin/pages/AdminPage"
 import { useAuthStore } from "../hooks"
 import { useEffect } from "react"
 import { Spinner } from 'react-bootstrap';
 import { LoginPage } from "../auth/LoginPage"
+
 
 export const CampeonatoRouter = () => {
     
@@ -45,6 +46,10 @@ export const CampeonatoRouter = () => {
                         </>
                     ) 
             }
+
+            <Route path="/equipos" element={<EquiposPage/>}/>
+            <Route path="/jugadores" element={<JugadoresPage/>}/>
+            <Route path="/resultados" element={<ResultadosPage/>}/>
 
         </Routes>
     </>

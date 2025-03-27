@@ -1,0 +1,16 @@
+.nav-item.nav-link:hover{
+    background-color: black;
+    color: white;
+    transform: scale(1.1);
+}
+
+#collapsible-nav-dropdown{
+    background-color: black;
+    color: white;
+}
+
+#collapsible-nav-dropdown:hover{
+    background-color: black;
+    color: white;
+    transform: scale(1.1);
+}

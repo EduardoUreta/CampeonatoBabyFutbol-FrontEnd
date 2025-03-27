@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAuthStore, useForm } from "../hooks";
 import Swal from "sweetalert2";
 import './LoginPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const loginInitialValue = {
     loginEmail: '',
@@ -29,6 +30,12 @@ export const LoginPage = () => {
         setIsVisible(!isVisible);
     };
 
+    const navigate = useNavigate();
+
+    const onNavigateBack = () => {
+      navigate('/admin/resultados/listar');
+    };
+
     const onLogin = (e) => {
         e.preventDefault();
         startLogin({correo: loginEmail, contrasena: loginPassword});
@@ -45,6 +52,10 @@ export const LoginPage = () => {
     <>
       <div className="container-fluid login-container">
         <div className="row">
+
+          <div className='p-2' onClick={onNavigateBack}>
+            <i className="fa-solid fa-arrow-left btn btn-primary"></i>
+          </div>
             
           <div className="col-md-6 login-form-1" style={{ display: isVisible ? 'block' : 'none' }}>
             <h3>Ingresa</h3>

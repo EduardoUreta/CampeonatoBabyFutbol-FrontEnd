@@ -1,36 +1,45 @@
 import { useNavigate } from "react-router-dom";
-import { useJugadorStore, useForm } from "../../../../hooks";
+import { useJugadorStore, useForm, useEquipoStore } from "../../../../hooks";
 import '../../pages/ContenidoPages.css';
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const jugadorInitialValue = {
   jugadorNombre: '',
   jugadorApellido: '',
-  jugadorEdad: '',
+  jugadorInstagram: '',
+  jugadorEquipo: '',
   jugadorImagen: null
 };
 
 export const AgregarJugador = () => {
-
-  const { jugadorNombre, jugadorApellido, jugadorEdad, jugadorImagen, onInputChange, onResetForm } = useForm(jugadorInitialValue);
+  
+  const navigate = useNavigate();
+  const { jugadorNombre, jugadorApellido, jugadorInstagram, jugadorEquipo, jugadorImagen, onInputChange, onResetForm } = useForm(jugadorInitialValue);
 
   const { startAddNewPlayer } = useJugadorStore();
+  const { startLoadTeams } = useEquipoStore();
 
-  const navigate = useNavigate();
-
-  const onNavigateBack = () => {
-    navigate(-1);
-  };
-
+  const { equipos } = useSelector(state => state.equipo);
+  
+  useEffect(() => {
+    startLoadTeams();
+  }, []);
+  
   const onForm = (e) => {
     e.preventDefault();
-    startAddNewPlayer({nombre: jugadorNombre, apellido: jugadorApellido, edad: jugadorEdad, imagen: jugadorImagen});
+    startAddNewPlayer({nombre: jugadorNombre, apellido: jugadorApellido, EquipoId: jugadorEquipo, instagram: jugadorInstagram, imagen: jugadorImagen});
+    navigate('/admin/jugadores');
   };
-
+  
   const onHandleFile = (e) => {
     const file = e.target.files[0];
     onInputChange({ target: { name: 'jugadorImagen', value: file } });
   };
-
+  
+  const onNavigateBack = () => {
+    navigate(-1);
+  };
   return (
     <div id ="Contenido">
       <div className="container">
@@ -71,20 +80,40 @@ export const AgregarJugador = () => {
               />
             </div>
 
+            {
+              (equipos.length > 0 ) &&
+              <div className="form-group mb-2">
+                <label>Equipo: </label>
+                <select
+                  className="form-control"
+                  name="jugadorEquipo"
+                  value={jugadorEquipo}
+                  onChange={onInputChange}
+                  required
+                >
+                  <option value="" disabled>Selecciona equipo del jugador</option>
+                  {equipos.map((equipo) => (
+                    <option key={equipo.id} value={equipo.id}>
+                      {equipo.nombre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            }
+            
             <div className="form-group mb-2">
-              <label>Edad: </label>
+              <label>Instagram: </label>
               <input
-                type="number"
+                type="text"
                 className="form-control"
-                placeholder="Ingresa la edad del jugador"
-                name='jugadorEdad'
-                min={15}
-                max={60}
-                value={jugadorEdad}
+                placeholder="Ingresa el instagram del jugador"
+                name='jugadorInstagram'
+                value={jugadorInstagram}
                 onChange={onInputChange}
-                required
               />
             </div>
+
+            
 
             <div className="form-group mb-2">
               <label>Imagen: </label>

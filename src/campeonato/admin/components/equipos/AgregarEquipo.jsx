@@ -22,6 +22,7 @@ export const AgregarEquipo = () => {
   const onForm = (e) => {
     e.preventDefault();
     startAddNewTeam({nombre: equipoNombre, imagen: equipoImagen});
+    navigate('/admin/equipos');
   };
 
   const onHandleFile = (e) => {

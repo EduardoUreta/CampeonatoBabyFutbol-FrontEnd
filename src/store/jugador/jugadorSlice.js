@@ -37,9 +37,12 @@ const initialState = {
       },
       onSetActivePlayer: (state, { payload }) => {
         state.jugadorActivo = payload
+      },
+      onNullActivePlayer: (state) => {
+        state.jugadorActivo = null
       }
     },
   });
   
-  export const { onAddNewPlayer, onLoadPlayers, onLoadOnePlayer, onUpdatePlayer, onDeletePlayer, onSetActivePlayer } = jugadorSlice.actions;
+  export const { onAddNewPlayer, onLoadPlayers, onLoadOnePlayer, onUpdatePlayer, onDeletePlayer, onSetActivePlayer, onNullActivePlayer } = jugadorSlice.actions;
   

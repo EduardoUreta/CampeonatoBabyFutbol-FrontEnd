@@ -80,7 +80,7 @@ export const useEquipoStore = () => {
     }
   };
 
-  const startUpdateTeam = async ({id, nombre, imagen}) => {
+  const startUpdateTeam = async ({id, nombre, ganados, empatados, perdidos, goles_favor, goles_contra, puntos, imagen}) => {
     try {
       const responseGet = await fetch(`${VITE_API_URL}/equipo/${id}`, {
         method: "GET",
@@ -91,6 +91,12 @@ export const useEquipoStore = () => {
       
       const formData = new FormData();
       formData.append('nombre', nombre || dataGet.nombre);
+      formData.append('ganados', ganados || dataGet.ganados);
+      formData.append('empatados', empatados || dataGet.empatados);
+      formData.append('perdidos', perdidos || dataGet.perdidos);
+      formData.append('goles_favor', goles_favor || dataGet.goles_favor);
+      formData.append('goles_contra', goles_contra || dataGet.goles_contra);
+      formData.append('puntos', puntos || dataGet.puntos);
       formData.append('tipo', 'equipo');
 
       if (imagen) {

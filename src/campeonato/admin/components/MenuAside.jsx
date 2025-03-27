@@ -19,9 +19,6 @@ export const MenuAside = () => {
           <li className="nav-item">
             <NavLink className={({ isActive }) => `nav-item nav-link ${isActive ? 'active' : ''}`} to="/admin/resultados"><i className="fa-solid fa-futbol"></i> Resultados</NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink className={({ isActive }) => `nav-item nav-link ${isActive ? 'active' : ''}`} to="/admin/fechas"><i className="fa-solid fa-calendar-days"></i> Fechas</NavLink>
-          </li>
         </ul>
       </nav>
     </aside>

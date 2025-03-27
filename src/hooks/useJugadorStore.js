@@ -1,34 +1,37 @@
 import { useDispatch } from "react-redux";
 import { getEnvVariables } from "../helpers"
 import Swal from "sweetalert2";
-import { onAddNewPlayer, onLoadOnePlayer, onLoadPlayers, onUpdatePlayer } from "../store/jugador/jugadorSlice";
+import { onAddNewPlayer, onLoadOnePlayer, onLoadPlayers, onSetActivePlayer, onUpdatePlayer } from "../store/jugador/jugadorSlice";
+import { useNavigate } from "react-router-dom";
 
 const { VITE_API_URL } = getEnvVariables();
 
 export const useJugadorStore = () => {
     
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const startAddNewPlayer = async({nombre, apellido, edad, imagen}) => {
+  const startAddNewPlayer = async({nombre, apellido, EquipoId, instagram, imagen}) => {
     try {
       const formData = new FormData();
       formData.append('nombre', nombre);
       formData.append('apellido', apellido);
-      formData.append('edad', edad);
+      formData.append('EquipoId', EquipoId);
+      formData.append('instagram', instagram);
       formData.append('imagen', imagen); 
 
       const response = await fetch(`${VITE_API_URL}/jugador/crear`, {
         method: "POST",
         body: formData, 
         credentials: 'include', 
-      });    
+      });         
 
       if (!response.ok) {
         throw new Error('Error al crear el jugador');
       }
         
       if(response.ok) {
-        dispatch(onAddNewPlayer({ nombre: nombre, imagen: imagen }));
+        dispatch(onAddNewPlayer({ nombre: nombre, apellido: apellido, EquipoId: EquipoId, instagram: instagram, imagen: imagen }));
 
         Swal.fire({
             icon: "success",
@@ -84,7 +87,7 @@ export const useJugadorStore = () => {
     }
   };
 
-  const startUpdatePlayer = async ({id, nombre, apellido, edad, imagen}) => {
+  const startUpdatePlayer = async ({id, nombre, apellido, edad, apodo, instagram, goles, tarjetas_amarillas, tarjetas_rojas, partidos_jugados, imagen}) => {
     
     try {
         const responseGet = await fetch(`${VITE_API_URL}/jugador/${id}`, {
@@ -98,6 +101,12 @@ export const useJugadorStore = () => {
         formData.append('nombre', nombre || dataGet.nombre);
         formData.append('apellido', apellido || dataGet.apellido);
         formData.append('edad', edad || dataGet.edad);
+        formData.append('apodo', apodo || dataGet.apodo);
+        formData.append('instagram', instagram || dataGet.instagram);
+        formData.append('goles', goles || dataGet.goles);
+        formData.append('tarjetas_amarillas', tarjetas_amarillas || dataGet.tarjetas_amarillas);
+        formData.append('tarjetas_rojas', tarjetas_rojas || dataGet.tarjetas_rojas);
+        formData.append('partidos_jugados', partidos_jugados || dataGet.partidos_jugados);
         formData.append('tipo', 'jugador');
 
         if (imagen) {
@@ -106,11 +115,15 @@ export const useJugadorStore = () => {
             formData.append('imagen', dataGet.imagen);
         };
 
+        formData.forEach((value, key) => {
+          console.log(`${key}: ${value}`);
+        });
+
         try {
             const responsePut = await fetch(`${VITE_API_URL}/jugador/${id}`, {
-            method: "PUT",
-            body: formData,
-            credentials: 'include',
+                method: "PUT",
+                body: formData,
+                credentials: 'include',
             });     
             
             if(responsePut.ok) {
@@ -121,6 +134,8 @@ export const useJugadorStore = () => {
                     icon: "success",
                     title: "Has actualizado al jugador correctamente",
                 });
+                // navigate('/admin/jugadores/listar');
+                
             }
         } catch (error) {
             console.error("Error actualizando jugador: ", error);
@@ -143,11 +158,16 @@ export const useJugadorStore = () => {
     }
   };
 
+  const startSetActivePlayer = async(jugador) => {
+    dispatch(onSetActivePlayer(jugador));
+  };
+
   return {
     startAddNewPlayer,
     startLoadPlayers,
     startLoadOnePlayer,
     startUpdatePlayer,
-    startDeletePlayer
+    startDeletePlayer,
+    startSetActivePlayer
   }
 }

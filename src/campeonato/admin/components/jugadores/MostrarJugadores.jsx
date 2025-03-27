@@ -1,26 +1,30 @@
 import { useEffect } from "react";
-import { useJugadorStore } from "../../../../hooks";
+import { useEquipoStore, useJugadorStore } from "../../../../hooks";
 import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import '../../pages/ContenidoPages.css';
 import Swal from "sweetalert2";
 import { onSetActivePlayer } from "../../../../store/jugador/jugadorSlice";
+import { findNonSerializableValue } from "@reduxjs/toolkit";
 
 export const MostrarJugadores = () => {
 
-    const { startLoadPlayers, startDeletePlayer, cargandoJugador } = useJugadorStore();
     const { jugadores } = useSelector(state => state.jugador);
+    const { equipos } = useSelector(state => state.equipo);
+    const { startLoadPlayers, startDeletePlayer, startSetActivePlayer, cargandoJugador } = useJugadorStore();
+    const { startLoadTeams } = useEquipoStore();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const onNavigateBack = () => {
-      navigate(-1);
+      navigate('/admin/jugadores');
     };
   
     useEffect(() => {
         startLoadPlayers();
+        startLoadTeams();
     }, []);
 
     const onHandleEliminar = (id) => {
@@ -44,6 +48,10 @@ export const MostrarJugadores = () => {
             }
         });
     };
+
+    const onHandleActivePlayer = (jugador) => {
+        startSetActivePlayer(jugador);
+    };
     
     if (cargandoJugador) {
         return <Spinner animation="border" />;
@@ -59,33 +67,43 @@ export const MostrarJugadores = () => {
                     <h3 className="text-center">LISTA DE JUGADORES</h3>
                     <div></div>
                 </div>
-                <div className="row p-5">
+                <div className="row justify-content-center">
                     {jugadores.length != 0 ? (
-                        jugadores.map((jugador) => (
-                            <div key={jugador.id} className="col-lg-4 col-md-4 col-sm-6 mb-4" style={ {flexWrap: "wrap" }}>
-                                <div className="card">
-                                    <img 
-                                        src={`http://localhost:3000/${jugador.imagen}`} 
-                                        className="card-img-top img-fluid img-thumbnail" 
-                                        alt={jugador.nombre} 
-                                    />
-                                    <div className="card-body">
-                                        <h5 className="card-title text-center">{jugador.nombre}</h5>
-                                        <div>
-                                            <Link to={`/admin/jugadores/${jugador.id}`} className=" botonesDetalleEquipo btn btn-primary text-light mb-1" style={{ background: "#95957d"}}>
-                                                Ver Detalles
-                                            </Link>
-                                            <Link to={`/admin/jugadores/actualizar/${jugador.id}`} className="botonesDetalleEquipo btn text-light mb-1" >
-                                                Actualizar
-                                            </Link>
-                                            <button onClick={() => onHandleEliminar(jugador.id)} className=" botonesDetalleEquipo btn btn-primary text-light mb-1" style={{ background: "red"}}>
-                                                Eliminar
-                                            </button>
+                        jugadores.map((jugador) => {
+                            const equipoDeJugador = equipos.find(e => e.id === jugador.EquipoId);
+                            let fondoColor = '';
+                            if(equipoDeJugador?.id == 47) fondoColor = '#3d3d05';
+                            if(equipoDeJugador?.id == 48) fondoColor = '#0a0a46';
+                            if(equipoDeJugador?.id == 49) fondoColor = '#0e420e';
+                            if(equipoDeJugador?.id == 46) fondoColor = '#4c1111';
+
+                            return (
+                                <div key={jugador.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+                                    <div className="card" style={{ backgroundImage: `url('http://localhost:3000/${equipoDeJugador?.imagen}`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundBlendMode: 'multiply', backgroundColor: fondoColor}}>
+                                        <img 
+                                            src={`http://localhost:3000/${jugador.imagen}`} 
+                                            className="card-img-top img-fluid img-thumbnail" 
+                                            alt={jugador.nombre} 
+                                        />
+                                        <div className="card-body text-light">
+                                            <h5 className="card-title text-center">{jugador.nombre} {jugador.apellido}</h5>
+                                            <p className="text-center">{equipoDeJugador?.nombre}</p>
+                                            <div className="d-flex justify-content-evenly mt-1">
+                                                <Link to={`/admin/jugadores/${jugador.id}`} className="btn btn-warning btn-sm text-light mb-1">
+                                                    <i className="fa-solid fa-eye"></i>
+                                                </Link>
+                                                <Link to={`/admin/jugadores/actualizar/${jugador.id}`} onClick={() => onHandleActivePlayer(jugador)} className="btn btn-primary btn-sm text-light mb-1" >
+                                                    <i className="fa-solid fa-pen-to-square"></i>
+                                                </Link>
+                                                <button onClick={() => onHandleEliminar(jugador.id)} className="btn btn-danger btn-sm text-light mb-1">
+                                                    <i className="fa-solid fa-trash"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))
+                            )
+                        })
                     ) : (
                         <div className="col-12 text-center">
                             <p>No hay jugadores disponibles.</p>

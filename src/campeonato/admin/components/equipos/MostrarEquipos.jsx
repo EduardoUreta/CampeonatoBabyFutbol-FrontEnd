@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import '../../pages/ContenidoPages.css';
 import Swal from "sweetalert2";
 import { onSetActiveTeam } from "../../../../store/equipo/equipoSlice";
+import { onNullActivePlayer } from "../../../../store/jugador/jugadorSlice";
 
 export const MostrarEquipos = () => {
 
@@ -16,11 +17,12 @@ export const MostrarEquipos = () => {
     const dispatch = useDispatch();
 
     const onNavigateBack = () => {
-      navigate(-1);
+      navigate('/admin/equipos');
     };
   
     useEffect(() => {
         startLoadTeams();
+        dispatch(onNullActivePlayer());
     }, []);
 
     const onHandleEliminar = (id) => {
@@ -59,10 +61,10 @@ export const MostrarEquipos = () => {
                     <h3 className="text-center">LISTA DE EQUIPOS</h3>
                     <div></div>
                 </div>
-                <div className="row p-5">
+                <div className="row">
                     {equipos.length != 0 ? (
                         equipos.map((equipo) => (
-                            <div key={equipo.id} className="col-lg-4 col-md-4 col-sm-6 mb-4" style={ {flexWrap: "wrap" }}>
+                            <div key={equipo.id} className="col-lg-6 col-md-6 col-sm-6 mb-4" style={ {flexWrap: "wrap" }}>
                                 <div className="card">
                                     <img 
                                         src={`http://localhost:3000/${equipo.imagen}`} 

@@ -24,6 +24,7 @@ export const ActualizarEquipo = () => {
   const onForm = (e) => {
     e.preventDefault();
     startUpdateTeam({id: id, nombre: equipoNombre, imagen: equipoImagen});
+    navigate('/admin/equipos');
   };
 
   const onHandleFile = (e) => {

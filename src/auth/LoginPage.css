@@ -13,9 +13,9 @@
 .row {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    /* gap: 30px; */
     align-items: center; /* Asegura que estén al mismo nivel */
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
 }
 
 h3 {
@@ -77,7 +77,7 @@ h3 {
 }
 
 .form-group .btnSubmit:active {
-    background-color: #004085;
+    background-color: #548500;
     transform: translateY(2px);
 }
 
@@ -89,7 +89,7 @@ h3 {
 /* Ajuste de tamaños para pantallas pequeñas */
 @media screen and (max-width: 768px) {
 .row {
-    flex-direction: column; /* Los formularios se apilarán verticalmente */
+    /* flex-direction: column; Los formularios se apilarán verticalmente */
     gap: 20px;
 }
 

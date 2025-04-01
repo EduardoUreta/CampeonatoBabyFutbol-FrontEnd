@@ -227,3 +227,52 @@
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
 }
+
+@media (max-width: 770px) {
+  .responsive-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .responsive-row img {
+      margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 30px !important;
+  }
+  th {
+    font-size: 15px !important;
+  }
+  td {
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  h1 {
+    font-size: 25px !important;
+  }
+  th {
+    font-size: 10px !important;
+  }
+  td {
+    font-size: 10px !important;
+  }
+}
+
+@media (max-width: 370px) {
+  h1 {
+    font-size: 25px !important;
+  }
+  th {
+    font-size: 8px !important;
+  }
+  td {
+    font-size: 8px !important;
+  }
+}

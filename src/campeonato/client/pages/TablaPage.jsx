@@ -37,26 +37,28 @@ export const TablaPage = () => {
                             <table className="table table-bordered mt-4 stylish-table">
                                 <thead className="table-dark">
                                     <tr>
-                                        <th className="text-center">Equipo</th>
-                                        <th className="text-center">Puntos</th>
+                                        <th className="text-center">#</th>
+                                        <th className="text-center">EQUIPO</th>
+                                        <th className="text-center">PTS</th>
                                         <th className="text-center">V</th>
                                         <th className="text-center">E</th>
                                         <th className="text-center">D</th>
                                         <th className="text-center">GA</th>
                                         <th className="text-center">GC</th>
-                                        <th className="text-center">Dif</th>
+                                        <th className="text-center">DIF</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 {
-                                    ordenarEquipos.map((equipo) => {
+                                    ordenarEquipos.map((equipo, index) => {
                                         return (
                                         <tr key={equipo.id} className="table-light">
-                                            <td className="text-center">
+                                            <td>{index}</td>
+                                            <td className="text-center responsive-row">
                                                 <img src={`${VITE_URL}/${equipo.imagen}`} className="img-fluid rounded-circle" alt={equipo.nombre}/>
                                                 <strong>{equipo.nombre} {equipo.apellido}</strong>
                                             </td>
-                                            <td className="text-center align-content-center">{equipo.puntos}</td>
+                                            <td className="text-center align-content-center"><strong>{equipo.puntos}</strong></td>
                                             <td className="text-center align-content-center">{equipo.ganados}</td>
                                             <td className="text-center align-content-center">{equipo.empatados}</td>
                                             <td className="text-center align-content-center">{equipo.perdidos}</td>

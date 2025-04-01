@@ -56,13 +56,13 @@ export const TablaPage = () => {
                                                 <img src={`${VITE_URL}/${equipo.imagen}`} className="img-fluid rounded-circle" alt={equipo.nombre}/>
                                                 <strong>{equipo.nombre} {equipo.apellido}</strong>
                                             </td>
-                                            <td className="text-center">{equipo.puntos}</td>
-                                            <td className="text-center">{equipo.ganados}</td>
-                                            <td className="text-center">{equipo.empatados}</td>
-                                            <td className="text-center">{equipo.perdidos}</td>
-                                            <td className="text-center">{equipo.goles_favor}</td>
-                                            <td className="text-center">{equipo.goles_contra}</td>
-                                            <td className="text-center">{equipo.goles_favor - equipo.goles_contra}</td>
+                                            <td className="text-center align-content-center">{equipo.puntos}</td>
+                                            <td className="text-center align-content-center">{equipo.ganados}</td>
+                                            <td className="text-center align-content-center">{equipo.empatados}</td>
+                                            <td className="text-center align-content-center">{equipo.perdidos}</td>
+                                            <td className="text-center align-content-center">{equipo.goles_favor}</td>
+                                            <td className="text-center align-content-center">{equipo.goles_contra}</td>
+                                            <td className="text-center align-content-center">{equipo.goles_favor - equipo.goles_contra}</td>
                                         </tr>
                                         )
                                     })

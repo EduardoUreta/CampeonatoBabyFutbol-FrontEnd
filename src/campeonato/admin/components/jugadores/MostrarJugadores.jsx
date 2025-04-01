@@ -83,7 +83,7 @@ export const MostrarJugadores = () => {
                                 <div key={jugador.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
                                     <div className="card" style={{ backgroundImage: `url('${VITE_URL}/${equipoDeJugador?.imagen}`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundBlendMode: 'multiply', backgroundColor: fondoColor}}>
                                         <img 
-                                            src={`${VITE_URL}/${jugador.imagen}`} 
+                                            src={(!jugador.imagen) ? `${VITE_URL}/${jugador.imagen}` : 'https://png.pngtree.com/png-vector/20220807/ourmid/pngtree-man-avatar-wearing-gray-suit-png-image_6102786.png'}
                                             className="card-img-top img-fluid img-thumbnail" 
                                             alt={jugador.nombre} 
                                         />

@@ -12,7 +12,7 @@ export const GoleadoresPage = () => {
     const { startLoadPlayers } = useJugadorStore();
     const { startLoadTeams } = useEquipoStore();
 
-    const { VITE_API_URL } = getEnvVariables();
+    const { VITE_API_URL, VITE_URL } = getEnvVariables();
 
     useEffect(() => {
         startLoadPlayers();
@@ -20,7 +20,10 @@ export const GoleadoresPage = () => {
     }, []);
 
     const goleadores = jugadores.filter(j => j.goles > 0);
-    const ordenarGoleadores = goleadores.sort((a, b) => b.goles - a.goles);
+    let ordenarGoleadores;
+    if(goleadores){
+        ordenarGoleadores = goleadores.sort((a, b) => b.goles - a.goles);
+    };
 
     return (
         <>
@@ -40,14 +43,20 @@ export const GoleadoresPage = () => {
                                 </thead>
                                 <tbody>
                                 {
-                                    ordenarGoleadores.map((goleador) => {
-                                        return (
-                                        <tr key={goleador.id} className="table-light">
-                                            <td className="text-center"><img src={`${VITE_API_URL}/${goleador.imagen}`} className="img-fluid rounded-circle" alt={goleador.nombre}/>{goleador.nombre} {goleador.apellido}</td>
-                                            <td className="text-center">{goleador.goles}</td>
-                                        </tr>
-                                        )
-                                    })
+                                    ordenarGoleadores ? (
+                                        ordenarGoleadores.map((goleador) => {
+                                            return (
+                                            <tr key={goleador.id} className="table-light">
+                                                <td className="text-center"><img src={`${VITE_URL}/${goleador.imagen}`} className="img-fluid rounded-circle" alt={goleador.nombre}/>{goleador.nombre} {goleador.apellido}</td>
+                                                <td className="text-center">{goleador.goles}</td>
+                                            </tr>
+                                            )
+                                        })
+                                    ) : (
+                                        <div className="col-12 text-center">
+                                            <p>Aún no hay goleadores.</p>
+                                        </div>
+                                    )
                                 }
                                 </tbody>
                             </table>

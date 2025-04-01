@@ -97,7 +97,7 @@ export const ActualizarResultado = () => {
   const { resultadoActivo } = useSelector(state => state.resultado);
   const { jugadores, jugadorActivo } = useSelector(state => state.jugador);
   const { estadisticas, estadisticaActivo } = useSelector(state => state.estadistica);
-  const { VITE_API_URL } = getEnvVariables();
+  const { VITE_URL } = getEnvVariables();
 
   const onNavigateBack = () => {
     navigate('/admin/resultados/listar');
@@ -319,7 +319,7 @@ export const ActualizarResultado = () => {
             <div className="form-group mb-3 w-75 m-auto">
               <div className="list-group justify-self-center">
                 <div className="text-center mb-3">
-                  <img src={`${VITE_API_URL}/${nombreEquipoUno?.imagen}`} className="img-fluid w-50"/>
+                  <img src={`${VITE_URL}/${nombreEquipoUno?.imagen}`} className="img-fluid w-50"/>
                 </div>
                 {jugadores && jugadores.filter(jugador => jugador.EquipoId == nombreEquipoUno?.id).map((jugador) => (
                   <div key={jugador.id} className="list-group-item">
@@ -429,7 +429,7 @@ export const ActualizarResultado = () => {
             <div className="form-group mb-3 w-75 m-auto">
               <div className="list-group justify-self-center">
                 <div className="text-center mb-3">
-                  <img src={`${VITE_API_URL}/${nombreEquipoDos?.imagen}`} className="img-fluid w-50"/>
+                  <img src={`${VITE_URL}/${nombreEquipoDos?.imagen}`} className="img-fluid w-50"/>
                 </div>
                 {jugadores && jugadores.filter(jugador => jugador.EquipoId == nombreEquipoDos?.id).map((jugador) => (
                   <div key={jugador.id} className="list-group-item">

@@ -34,7 +34,7 @@ export const AgregarResultado = () => {
   const { equipos } = useSelector(state => state.equipo);
 
   const navigate = useNavigate();
-  const { VITE_API_URL } = getEnvVariables();
+  const { VITE_URL } = getEnvVariables();
 
   const onNavigateBack = () => {
     navigate(-1);
@@ -219,7 +219,7 @@ export const AgregarResultado = () => {
 
                     <div className="text-center mx-3">
                       <img 
-                        src={`${VITE_API_URL}/${marcador.imagen_equipo_uno}`} 
+                        src={`${VITE_URL}/${marcador.imagen_equipo_uno}`} 
                         alt={marcador.equipo_uno} 
                         className="w-50 img-fluid mb-2 rounded-circle shadow-lg"
                       />
@@ -240,7 +240,7 @@ export const AgregarResultado = () => {
                     
                     <div className="text-center mx-3">
                       <img 
-                        src={`${VITE_API_URL}/${marcador.imagen_equipo_dos}`} 
+                        src={`${VITE_URL}/${marcador.imagen_equipo_dos}`} 
                         alt={marcador.equipo_dos} 
                         className="w-50 img-fluid mb-2 rounded-circle shadow-lg"
                       />

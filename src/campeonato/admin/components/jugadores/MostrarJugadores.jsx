@@ -18,7 +18,7 @@ export const MostrarJugadores = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { VITE_API_URL } = getEnvVariables();
+    const { VITE_URL } = getEnvVariables();
 
     const onNavigateBack = () => {
       navigate('/admin/jugadores');
@@ -81,9 +81,9 @@ export const MostrarJugadores = () => {
 
                             return (
                                 <div key={jugador.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
-                                    <div className="card" style={{ backgroundImage: `url('${VITE_API_URL}/${equipoDeJugador?.imagen}`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundBlendMode: 'multiply', backgroundColor: fondoColor}}>
+                                    <div className="card" style={{ backgroundImage: `url('${VITE_URL}/${equipoDeJugador?.imagen}`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundBlendMode: 'multiply', backgroundColor: fondoColor}}>
                                         <img 
-                                            src={`${VITE_API_URL}/${jugador.imagen}`} 
+                                            src={`${VITE_URL}/${jugador.imagen}`} 
                                             className="card-img-top img-fluid img-thumbnail" 
                                             alt={jugador.nombre} 
                                         />

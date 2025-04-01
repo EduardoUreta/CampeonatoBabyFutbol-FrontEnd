@@ -7,7 +7,7 @@ export const TablaPage = () => {
     const { equipos } = useSelector(state => state.equipo);
     const { startLoadTeams } = useEquipoStore();
 
-    const { VITE_API_URL } = getEnvVariables();
+    const { VITE_URL } = getEnvVariables();
     
     useEffect(() => {
         startLoadTeams();
@@ -53,7 +53,7 @@ export const TablaPage = () => {
                                         return (
                                         <tr key={equipo.id} className="table-light">
                                             <td className="text-center">
-                                                <img src={`${VITE_API_URL}/${equipo.imagen}`} className="img-fluid rounded-circle" alt={equipo.nombre}/>
+                                                <img src={`${VITE_URL}/${equipo.imagen}`} className="img-fluid rounded-circle" alt={equipo.nombre}/>
                                                 <strong>{equipo.nombre} {equipo.apellido}</strong>
                                             </td>
                                             <td className="text-center">{equipo.puntos}</td>

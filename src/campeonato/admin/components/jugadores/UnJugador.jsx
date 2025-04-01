@@ -16,7 +16,7 @@ export const UnJugador = () => {
     const { startLoadOnePlayer } = useJugadorStore();
 
     const navigate = useNavigate();
-    const { VITE_API_URL } = getEnvVariables();
+    const { VITE_URL } = getEnvVariables();
 
     const onNavigateBack = () => {
         navigate('/admin/jugadores/listar');
@@ -54,7 +54,7 @@ export const UnJugador = () => {
                 <div className="card">
                     <div className="card-body text-center">
                     <img
-                        src={`${VITE_API_URL}/${jugadorActivo.imagen}`}
+                        src={`${VITE_URL}/${jugadorActivo.imagen}`}
                         className="card-img-top img-fluid img-thumbnail"
                         alt={jugadorActivo.nombre}
                     />

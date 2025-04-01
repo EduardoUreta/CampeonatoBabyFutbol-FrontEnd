@@ -24,7 +24,7 @@ export const EquiposPage = () => {
   const { jugadores, jugadorActivo } = useSelector(state => state.jugador);
   const { estadisticas, estadisticaActivo } = useSelector(state => state.estadistica);
 
-  const { VITE_API_URL } = getEnvVariables();
+  const { VITE_API_URL, VITE_URL } = getEnvVariables();
 
   const onClickCardTeam = (teamId) => {
     const equipo  = equipos.find(e => e.id === teamId);
@@ -54,22 +54,29 @@ export const EquiposPage = () => {
           </div>
           <div className="row">
             {
-              equipos.map((equipo, index) => {
-                return (
-                  <div key={equipo.id} className="col-md-6 d-flex justify-content-center" data-aos="fade-up" data-aos-delay={index*150}>
-                    <div className="card w-50 mb-3 mt-3" onClick={() => {onClickCardTeam(equipo.id); handleShow()} }>
-                      <img 
-                        src={`${VITE_API_URL}/${equipo.imagen}`} 
-                        className="card-img-top img-fluid img-thumbnail" 
-                        alt={equipo.nombre} 
-                      />
-                      <div className="card-text">
-                        <h5 className="text-center">{equipo.nombre}</h5>
+              equipos ? 
+              (
+                equipos.map((equipo, index) => {
+                  return (
+                    <div key={equipo.id} className="col-md-6 d-flex justify-content-center" data-aos="fade-up" data-aos-delay={index*150}>
+                      <div className="card w-50 mb-3 mt-3" onClick={() => {onClickCardTeam(equipo.id); handleShow()} }>
+                        <img 
+                          src={`${VITE_URL}/${equipo.imagen}`} 
+                          className="card-img-top img-fluid img-thumbnail" 
+                          alt={equipo.nombre} 
+                        />
+                        <div className="card-text">
+                          <h5 className="text-center">{equipo.nombre}</h5>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )
-              })
+                  )
+                })
+              ) : (
+                <div className="col-12 text-center">
+                  <p>No hay equipos disponibles.</p>
+                </div>
+              )
             }
           </div>
         </div>

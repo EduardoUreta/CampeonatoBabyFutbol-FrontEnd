@@ -17,7 +17,7 @@ export const MostrarResultados = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch(); 
-    const {  VITE_API_URL } = getEnvVariables();
+    const { VITE_URL } = getEnvVariables();
 
     const onNavigateBack = () => {
       navigate(-1);
@@ -77,7 +77,7 @@ export const MostrarResultados = () => {
 
                                             <div className="mb-3 mb-md-0">
                                                 <img 
-                                                    src={`${VITE_API_URL}/${equipoUno?.imagen}`} 
+                                                    src={`${VITE_URL}/${equipoUno?.imagen}`} 
                                                     alt={equipoUno?.nombre} 
                                                     className="img-fluid rounded-circle shadow"
                                                     style={{ width: "100px", height: "100px", objectFit: "cover", border: "4px solid #ddd" }}
@@ -100,7 +100,7 @@ export const MostrarResultados = () => {
 
                                             <div className="mb-3 mb-md-0">
                                                 <img 
-                                                    src={`${VITE_API_URL}/${equipoDos?.imagen}`} 
+                                                    src={`${VITE_URL}/${equipoDos?.imagen}`} 
                                                     alt={equipoDos?.nombre} 
                                                     className="img-fluid rounded-circle shadow"
                                                     style={{ width: "100px", height: "100px", objectFit: "cover", border: "4px solid #ddd" }}

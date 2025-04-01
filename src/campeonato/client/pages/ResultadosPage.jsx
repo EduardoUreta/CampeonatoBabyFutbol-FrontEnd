@@ -17,7 +17,7 @@ export const ResultadosPage = () => {
     const { startLoadStats, startSetActiveStat } = useEstadisticaStore();
     const { startLoadPlayers } = useJugadorStore();
 
-    const { VITE_API_URL } = getEnvVariables();
+    const { VITE_API_URL, VITE_URL } = getEnvVariables();
 
     useEffect(() => {
         startLoadResults();
@@ -88,7 +88,7 @@ export const ResultadosPage = () => {
 
                                                 <div className="mb-3 mb-md-0">
                                                     <img
-                                                        src={`${VITE_API_URL}/${equipoUno?.imagen}`}
+                                                        src={`${VITE_URL}/${equipoUno?.imagen}`}
                                                         alt={equipoUno?.nombre}
                                                         className="img-fluid rounded-circle shadow"
                                                         style={{ width: "100px", height: "100px", objectFit: "cover", border: "4px solid #ddd" }}
@@ -112,7 +112,7 @@ export const ResultadosPage = () => {
 
                                                 <div className="mb-3 mb-md-0">
                                                     <img
-                                                        src={`${VITE_API_URL}/${equipoDos?.imagen}`}
+                                                        src={`${VITE_URL}/${equipoDos?.imagen}`}
                                                         alt={equipoDos?.nombre}
                                                         className="img-fluid rounded-circle shadow"
                                                         style={{ width: "100px", height: "100px", objectFit: "cover", border: "4px solid #ddd" }}

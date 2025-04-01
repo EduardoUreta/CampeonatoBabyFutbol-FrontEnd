@@ -53,7 +53,7 @@ export const TablaPage = () => {
                                     ordenarEquipos.map((equipo, index) => {
                                         return (
                                         <tr key={equipo.id} className="table-light">
-                                            <td>{index}</td>
+                                            <td>{index + 1}</td>
                                             <td className="text-center responsive-row">
                                                 <img src={`${VITE_URL}/${equipo.imagen}`} className="img-fluid rounded-circle" alt={equipo.nombre}/>
                                                 <strong>{equipo.nombre} {equipo.apellido}</strong>

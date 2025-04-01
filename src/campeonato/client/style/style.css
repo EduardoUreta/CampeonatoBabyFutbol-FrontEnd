@@ -263,9 +263,13 @@
   td {
     font-size: 10px !important;
   }
+  img {
+    width: 50px !important;
+    height: 50px !important;
+  }
 }
 
-@media (max-width: 370px) {
+@media (max-width: 380px) {
   h1 {
     font-size: 25px !important;
   }
@@ -274,5 +278,9 @@
   }
   td {
     font-size: 8px !important;
+  }
+  img {
+    width: 40px !important;
+    height: 40px !important;
   }
 }

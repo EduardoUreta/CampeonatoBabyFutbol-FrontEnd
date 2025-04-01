@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useEquipoStore, useEstadisticaStore, useJugadorStore, useResultadoStore } from "../../../hooks";
+import { getEnvVariables } from "../../../helpers";
 
 export const ResultadosPage = () => {
 
@@ -15,6 +16,8 @@ export const ResultadosPage = () => {
     const { startLoadTeams } = useEquipoStore();
     const { startLoadStats, startSetActiveStat } = useEstadisticaStore();
     const { startLoadPlayers } = useJugadorStore();
+
+    const { VITE_API_URL } = getEnvVariables();
 
     useEffect(() => {
         startLoadResults();
@@ -85,7 +88,7 @@ export const ResultadosPage = () => {
 
                                                 <div className="mb-3 mb-md-0">
                                                     <img
-                                                        src={`http://localhost:3000/${equipoUno?.imagen}`}
+                                                        src={`${VITE_API_URL}/${equipoUno?.imagen}`}
                                                         alt={equipoUno?.nombre}
                                                         className="img-fluid rounded-circle shadow"
                                                         style={{ width: "100px", height: "100px", objectFit: "cover", border: "4px solid #ddd" }}
@@ -109,7 +112,7 @@ export const ResultadosPage = () => {
 
                                                 <div className="mb-3 mb-md-0">
                                                     <img
-                                                        src={`http://localhost:3000/${equipoDos?.imagen}`}
+                                                        src={`${VITE_API_URL}/${equipoDos?.imagen}`}
                                                         alt={equipoDos?.nombre}
                                                         className="img-fluid rounded-circle shadow"
                                                         style={{ width: "100px", height: "100px", objectFit: "cover", border: "4px solid #ddd" }}

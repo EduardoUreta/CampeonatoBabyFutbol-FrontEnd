@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { useEquipoStore, useJugadorStore } from "../../../hooks";
 import { useEffect } from "react";
 import '../style/style.css';
+import { getEnvVariables } from "../../../helpers";
 
 export const GoleadoresPage = () => {
 
@@ -10,6 +11,8 @@ export const GoleadoresPage = () => {
 
     const { startLoadPlayers } = useJugadorStore();
     const { startLoadTeams } = useEquipoStore();
+
+    const { VITE_API_URL } = getEnvVariables();
 
     useEffect(() => {
         startLoadPlayers();
@@ -40,7 +43,7 @@ export const GoleadoresPage = () => {
                                     ordenarGoleadores.map((goleador) => {
                                         return (
                                         <tr key={goleador.id} className="table-light">
-                                            <td className="text-center"><img src={`http://localhost:3000/${goleador.imagen}`} className="img-fluid rounded-circle" alt={goleador.nombre}/>{goleador.nombre} {goleador.apellido}</td>
+                                            <td className="text-center"><img src={`${VITE_API_URL}/${goleador.imagen}`} className="img-fluid rounded-circle" alt={goleador.nombre}/>{goleador.nombre} {goleador.apellido}</td>
                                             <td className="text-center">{goleador.goles}</td>
                                         </tr>
                                         )

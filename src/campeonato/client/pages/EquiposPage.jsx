@@ -5,6 +5,7 @@ import '../style/style.css'
 import { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { getEnvVariables } from "../../../helpers";
 
 export const EquiposPage = () => {
 
@@ -22,6 +23,8 @@ export const EquiposPage = () => {
   const { resultadoActivo } = useSelector(state => state.resultado);
   const { jugadores, jugadorActivo } = useSelector(state => state.jugador);
   const { estadisticas, estadisticaActivo } = useSelector(state => state.estadistica);
+
+  const { VITE_API_URL } = getEnvVariables();
 
   const onClickCardTeam = (teamId) => {
     const equipo  = equipos.find(e => e.id === teamId);
@@ -56,7 +59,7 @@ export const EquiposPage = () => {
                   <div key={equipo.id} className="col-md-6 d-flex justify-content-center" data-aos="fade-up" data-aos-delay={index*150}>
                     <div className="card w-50 mb-3 mt-3" onClick={() => {onClickCardTeam(equipo.id); handleShow()} }>
                       <img 
-                        src={`http://localhost:3000/${equipo.imagen}`} 
+                        src={`${VITE_API_URL}/${equipo.imagen}`} 
                         className="card-img-top img-fluid img-thumbnail" 
                         alt={equipo.nombre} 
                       />

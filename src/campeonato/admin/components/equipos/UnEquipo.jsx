@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { onNullActivePlayer } from '../../../../store/jugador/jugadorSlice';
+import { getEnvVariables } from '../../../../helpers';
 
 export const UnEquipo = () => {
 
@@ -18,6 +19,7 @@ export const UnEquipo = () => {
     const { startLoadResults } = useResultadoStore();
 
     const navigate = useNavigate();
+    const { VITE_API_URL } = getEnvVariables();
 
     const onNavigateBack = () => {
         navigate('/admin/equipos/listar');
@@ -57,7 +59,7 @@ export const UnEquipo = () => {
                     <div className="card">
                         <div className="card-body text-center">
                         <img
-                            src={`http://localhost:3000/${equipoActivo.imagen}`}
+                            src={`${VITE_API_URL}/${equipoActivo.imagen}`}
                             className="card-img-top img-fluid img-thumbnail w-75"
                             alt={equipoActivo.nombre}
                         />

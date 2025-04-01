@@ -3,6 +3,7 @@ import { CampeonatoNavbar } from "../../components/CampeonatoNavbar"
 import { useEffect, useState } from "react";
 import { useEquipoStore, useJugadorStore } from "../../../hooks";
 import bannerImage from '../../../assets/img/bannerFondoJugadoresCard.webp';
+import { getEnvVariables } from "../../../helpers";
 
 export const JugadoresPage = () => {
 
@@ -12,6 +13,8 @@ export const JugadoresPage = () => {
     const { equipos } = useSelector(state => state.equipo);
     const { startLoadPlayers } = useJugadorStore();
     const { startLoadTeams } = useEquipoStore();
+
+    const { VITE_API_URL } = getEnvVariables();
 
     const handleChangeNombre = (e) => {
         setBusqueda(e.target.value)
@@ -71,7 +74,7 @@ export const JugadoresPage = () => {
                                             <div className="row">
                                                 <div className="col-md-4 col-sm-12 text-center">
                                                     <img
-                                                        src={(!jugador.imagen) ? `http://localhost:3000/${jugador.imagen}` : 'https://png.pngtree.com/png-vector/20220807/ourmid/pngtree-man-avatar-wearing-gray-suit-png-image_6102786.png'}
+                                                        src={(!jugador.imagen) ? `${VITE_API_URL}/${jugador.imagen}` : 'https://png.pngtree.com/png-vector/20220807/ourmid/pngtree-man-avatar-wearing-gray-suit-png-image_6102786.png'}
                                                         alt={jugador.nombre}
                                                         className="img-fluid card-img img-thumbnail w-50"
                                                     />
@@ -116,7 +119,7 @@ export const JugadoresPage = () => {
                                         <div className="row">
                                             <div className="col-md-4 col-sm-12 text-center">
                                                 <img
-                                                    src={(!jugador.imagen) ? `http://localhost:3000/${jugador.imagen}` : 'https://png.pngtree.com/png-vector/20220807/ourmid/pngtree-man-avatar-wearing-gray-suit-png-image_6102786.png'}
+                                                    src={(!jugador.imagen) ? `${VITE_API_URL}/${jugador.imagen}` : 'https://png.pngtree.com/png-vector/20220807/ourmid/pngtree-man-avatar-wearing-gray-suit-png-image_6102786.png'}
                                                     alt={jugador.nombre}
                                                     className="img-fluid card-img img-thumbnail w-50"
                                                 />

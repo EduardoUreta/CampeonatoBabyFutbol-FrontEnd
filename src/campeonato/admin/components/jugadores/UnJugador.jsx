@@ -4,6 +4,7 @@ import { useJugadorStore } from '../../../../hooks';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
+import { getEnvVariables } from '../../../../helpers';
 
 export const UnJugador = () => {
 
@@ -15,6 +16,7 @@ export const UnJugador = () => {
     const { startLoadOnePlayer } = useJugadorStore();
 
     const navigate = useNavigate();
+    const { VITE_API_URL } = getEnvVariables();
 
     const onNavigateBack = () => {
         navigate('/admin/jugadores/listar');
@@ -52,7 +54,7 @@ export const UnJugador = () => {
                 <div className="card">
                     <div className="card-body text-center">
                     <img
-                        src={`http://localhost:3000/${jugadorActivo.imagen}`}
+                        src={`${VITE_API_URL}/${jugadorActivo.imagen}`}
                         className="card-img-top img-fluid img-thumbnail"
                         alt={jugadorActivo.nombre}
                     />

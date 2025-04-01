@@ -7,6 +7,7 @@ import '../../pages/ContenidoPages.css';
 import Swal from "sweetalert2";
 import { onSetActiveTeam } from "../../../../store/equipo/equipoSlice";
 import { onNullActivePlayer } from "../../../../store/jugador/jugadorSlice";
+import { getEnvVariables } from "../../../../helpers";
 
 export const MostrarEquipos = () => {
 
@@ -15,6 +16,8 @@ export const MostrarEquipos = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    
+    const { VITE_API_URL } = getEnvVariables();
 
     const onNavigateBack = () => {
       navigate('/admin/equipos');
@@ -67,7 +70,7 @@ export const MostrarEquipos = () => {
                             <div key={equipo.id} className="col-lg-6 col-md-6 col-sm-6 mb-4" style={ {flexWrap: "wrap" }}>
                                 <div className="card">
                                     <img 
-                                        src={`http://localhost:3000/${equipo.imagen}`} 
+                                        src={`${VITE_API_URL}/${equipo.imagen}`} 
                                         className="card-img-top img-fluid img-thumbnail" 
                                         alt={equipo.nombre} 
                                     />

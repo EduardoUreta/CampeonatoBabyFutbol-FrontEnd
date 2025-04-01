@@ -117,9 +117,17 @@ export const useEquipoStore = () => {
           const data = await responsePut.json();
           console.log(data);
           dispatch(onUpdateTeam(data));
+          Swal.fire({
+            icon: "success",
+            title: "Has actualizado el equipo correctamente",
+          });
         }
       } catch (error) {
         console.error("Error actualizando equipo: ", error);
+        Swal.fire({
+          icon: "error",
+          title: "Error al actualizar el equipo",
+        });
       }
 
     } catch (error) {

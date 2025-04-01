@@ -18,7 +18,7 @@ export const ActualizarEquipo = () => {
   const navigate = useNavigate();
 
   const onNavigateBack = () => {
-    navigate(-1);
+    navigate('/admin/equipos/listar');
   };
 
   const onForm = (e) => {

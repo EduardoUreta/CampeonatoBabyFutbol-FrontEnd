@@ -12,6 +12,7 @@ const parseJwt = (token) => {
 }
 
 export const userToken = () => {
+    // Si está activo el httpOnly
     if(document.cookie){
         const token = document.cookie.split('; ').find(row => row.startsWith('Bearer=')).split('=')[1];
         console.log('Token:', token);
@@ -20,5 +21,11 @@ export const userToken = () => {
         console.log('User:', user);
         
         return user;
-    };
+    } else {
+        const token = localStorage.getItem("token");
+        if(!token) return null;
+        
+        const user = parseJwt(token);
+        return user;
+    }
 };

@@ -23,12 +23,10 @@ export const useAuthStore = () => {
             credentials: 'include',
           });
 
-          console.log("Response:",response);
-          console.log("Data:", await response.json());
-          
-          
+          const data = await response.json();
 
-          if(response.ok){
+          if(response.ok && data.token){
+            localStorage.setItem('token', data.token)
             const user = userToken();
             console.log("UserToken:",user);
             

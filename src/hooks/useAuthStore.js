@@ -14,7 +14,6 @@ export const useAuthStore = () => {
 
     const startLogin = async ({correo, contrasena}) => {
         dispatch(onChecking());
-        console.log('Check');
         try {
           const response = await fetch(`${VITE_API_URL}/auth/login`, {
             method: "POST",
@@ -28,7 +27,6 @@ export const useAuthStore = () => {
           if(response.ok && data.token){
             localStorage.setItem('token', data.token)
             const user = userToken();
-            console.log("UserToken:",user);
             
             dispatch(onLogin({rol: user.rol, _id: user._id, nombre: user.nombre}))
             Swal.fire({

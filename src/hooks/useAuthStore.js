@@ -51,6 +51,10 @@ export const useAuthStore = () => {
 
         } catch (error) {
           console.error("Error: ", error);
+          Swal.fire({
+            icon: "error",
+            title: "Error al iniciar sesión",
+          });
         };
     };
 

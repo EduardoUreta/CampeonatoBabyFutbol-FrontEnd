@@ -113,7 +113,7 @@ export const useAuthStore = () => {
   };
 
   const startLogout = () => {
-      Cookies.remove('Bearer');
+      Cookies.remove('Bearer', { path: '/' });
       localStorage.removeItem('token');
       dispatch(onLogout());
   };

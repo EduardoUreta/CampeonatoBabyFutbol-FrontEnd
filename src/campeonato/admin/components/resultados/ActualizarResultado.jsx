@@ -346,7 +346,7 @@ export const ActualizarResultado = () => {
                               -
                             </button>
                             <input
-                              type="number"
+                              type="text"
                               className="form-control mx-2"
                               value={jugadoresStats[jugador.id]?.goles || 0}
                               onChange={() => {}}
@@ -375,7 +375,7 @@ export const ActualizarResultado = () => {
                               -
                             </button>
                             <input
-                              type="number"
+                              type="text"
                               className="form-control mx-2"
                               value={jugadoresStats[jugador.id]?.amarillas || 0}
                               onChange={() => {}}
@@ -404,7 +404,7 @@ export const ActualizarResultado = () => {
                               -
                             </button>
                             <input
-                              type="number"
+                              type="text"
                               className="form-control mx-2"
                               value={jugadoresStats[jugador.id]?.rojas || 0}
                               onChange={() => {}}

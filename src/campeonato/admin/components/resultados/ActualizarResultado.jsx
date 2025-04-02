@@ -106,6 +106,7 @@ export const ActualizarResultado = () => {
   const onForm = (e) => {
     e.preventDefault();
     const resultadoFinal = `${goles_equipo_uno}x${goles_equipo_dos}`;
+
     startUpdateResult({
       id: id, 
       equipo_uno: resultadoActivo?.equipo_uno, 
@@ -116,31 +117,31 @@ export const ActualizarResultado = () => {
       resultado: resultadoFinal 
     });
     
-    const puntosEquipoUno = goles_equipo_uno > goles_equipo_dos ? 3 : goles_equipo_uno === goles_equipo_dos ? 1 : 0;
-    const puntosEquipoDos = goles_equipo_uno < goles_equipo_dos ? 3 : goles_equipo_uno === goles_equipo_dos ? 1 : 0;
+    const puntosEquipoUno = goles_equipo_uno > goles_equipo_dos ? equipoActivo[0]?.puntos + 3 : goles_equipo_uno === goles_equipo_dos ? equipoActivo[0]?.puntos + 1 : equipoActivo[0]?.puntos + 0;
+    const puntosEquipoDos = goles_equipo_uno < goles_equipo_dos ? equipoActivo[1]?.puntos + 3 : goles_equipo_uno === goles_equipo_dos ? equipoActivo[1]?.puntos + 1 : equipoActivo[1]?.puntos + 0;
     
     startUpdateTeam({
       id: equipoActivo[0]?.id,
-      ganados: goles_equipo_uno > goles_equipo_dos ? 1 : 0,
-      empatados: goles_equipo_uno === goles_equipo_dos ? 1 : 0,
-      perdidos: goles_equipo_uno < goles_equipo_dos ? 1 : 0,
-      goles_favor: goles_equipo_uno,
-      goles_contra: goles_equipo_dos,
+      ganados: goles_equipo_uno > goles_equipo_dos ? equipoActivo[0]?.ganados + 1 : equipoActivo[0]?.ganados + 0,
+      empatados: goles_equipo_uno === goles_equipo_dos ? equipoActivo[0]?.empatados + 1 : equipoActivo[0]?.empatados + 0,
+      perdidos: goles_equipo_uno < goles_equipo_dos ? equipoActivo[0]?.perdidos + 1 : equipoActivo[0]?.perdidos + 0,
+      goles_favor: equipoActivo[0]?.goles_favor + Number(goles_equipo_uno),
+      goles_contra: equipoActivo[0]?.goles_contra + Number(goles_equipo_dos),
       puntos: puntosEquipoUno,
     });
-    
+
     startUpdateTeam({
       id: equipoActivo[1]?.id,
-      ganados: goles_equipo_uno < goles_equipo_dos ? 1 : 0,
-      empatados: goles_equipo_uno === goles_equipo_dos ? 1 : 0,
-      perdidos: goles_equipo_uno > goles_equipo_dos ? 1 : 0,
-      goles_favor: goles_equipo_dos,
-      goles_contra: goles_equipo_uno,
+      ganados: goles_equipo_uno < goles_equipo_dos ? equipoActivo[1]?.ganados + 1 : equipoActivo[1]?.ganados + 0,
+      empatados: goles_equipo_uno === goles_equipo_dos ? equipoActivo[1]?.empatados + 1 : equipoActivo[1]?.empatados + 0,
+      perdidos: goles_equipo_uno > goles_equipo_dos ? equipoActivo[1]?.perdidos + 1 : equipoActivo[1]?.perdidos + 0,
+      goles_favor: equipoActivo[1]?.goles_favor + Number(goles_equipo_dos),
+      goles_contra: equipoActivo[1]?.goles_contra + Number(goles_equipo_uno),
       puntos: puntosEquipoDos,
     });    
 
     jugadorActivo[0].forEach((jugador) => {
-      if(estadisticaActivo){
+      if(estadisticaActivo.length != 0){
         const stat = estadisticaActivo.find(stat => stat.jugador_id === jugador.id);
         if(stat){
           startUpdateStat({
@@ -151,9 +152,9 @@ export const ActualizarResultado = () => {
           });
           startUpdatePlayer({
             id: jugador.id,
-            goles: + (jugadoresStats[jugador.id]?.goles || 0),
-            tarjetas_amarillas: + (jugadoresStats[jugador.id]?.amarillas || 0), 
-            tarjetas_rojas: + (jugadoresStats[jugador.id]?.rojas || 0), 
+            goles: jugador.goles + Number(jugadoresStats[jugador.id]?.goles || 0),
+            tarjetas_amarillas: jugador.tarjetas_amarillas + Number(jugadoresStats[jugador.id]?.amarillas || 0), 
+            tarjetas_rojas: jugador.tarjetas_rojas + Number(jugadoresStats[jugador.id]?.rojas || 0), 
             partidos_jugados: estadisticas.filter(s => s.jugador_id === jugador.id).length
           });
         };
@@ -166,11 +167,18 @@ export const ActualizarResultado = () => {
           tarjetas_amarillas: jugadoresStats[jugador.id]?.amarillas || 0, 
           tarjetas_rojas: jugadoresStats[jugador.id]?.rojas || 0, 
         });
+        startUpdatePlayer({
+          id: jugador.id,
+          goles: jugador.goles + Number(jugadoresStats[jugador.id]?.goles || 0),
+          tarjetas_amarillas: jugador.tarjetas_amarillas + Number(jugadoresStats[jugador.id]?.amarillas || 0), 
+          tarjetas_rojas: jugador.tarjetas_rojas + Number(jugadoresStats[jugador.id]?.rojas || 0), 
+          partidos_jugados: estadisticas.filter(s => s.jugador_id === jugador.id).length
+        });
       }
     });
 
     jugadorActivo[1].forEach((jugador) => {
-      if(estadisticaActivo){
+      if(estadisticaActivo.length != 0){
         const stat = estadisticaActivo.find(stat => stat.jugador_id === jugador.id);
         if(stat){
           startUpdateStat({
@@ -181,9 +189,9 @@ export const ActualizarResultado = () => {
           });
           startUpdatePlayer({
             id: jugador.id,
-            goles: + (jugadoresStats[jugador.id]?.goles || 0),
-            tarjetas_amarillas: + (jugadoresStats[jugador.id]?.amarillas || 0), 
-            tarjetas_rojas: + (jugadoresStats[jugador.id]?.rojas || 0), 
+            goles: jugador.goles + Number(jugadoresStats[jugador.id]?.goles || 0),
+            tarjetas_amarillas: jugador.tarjetas_amarillas + Number(jugadoresStats[jugador.id]?.amarillas || 0), 
+            tarjetas_rojas: jugador.tarjetas_rojas + Number(jugadoresStats[jugador.id]?.rojas || 0), 
             partidos_jugados: estadisticas.filter(s => s.jugador_id === jugador.id).length
           });
         };
@@ -195,6 +203,13 @@ export const ActualizarResultado = () => {
           goles: jugadoresStats[jugador.id]?.goles || 0, 
           tarjetas_amarillas: jugadoresStats[jugador.id]?.amarillas || 0, 
           tarjetas_rojas: jugadoresStats[jugador.id]?.rojas || 0
+        });
+        startUpdatePlayer({
+          id: jugador.id,
+          goles: jugador.goles + Number(jugadoresStats[jugador.id]?.goles || 0),
+          tarjetas_amarillas: jugador.tarjetas_amarillas + Number(jugadoresStats[jugador.id]?.amarillas || 0), 
+          tarjetas_rojas: jugador.tarjetas_rojas + Number(jugadoresStats[jugador.id]?.rojas || 0), 
+          partidos_jugados: estadisticas.filter(s => s.jugador_id === jugador.id).length
         });
       };
     });
@@ -283,7 +298,7 @@ export const ActualizarResultado = () => {
               <div className="col-md-6 form-group mb-1">
                 <label>Goles {nombreEquipoUno?.nombre}:</label>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
                   name="goles_equipo_uno"
                   value={goles_equipo_uno}
@@ -307,7 +322,7 @@ export const ActualizarResultado = () => {
               <div className="col-md-6 form-group mb-1">
                 <label>Goles {nombreEquipoDos?.nombre}:</label>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
                   name="goles_equipo_dos"
                   value={goles_equipo_dos}

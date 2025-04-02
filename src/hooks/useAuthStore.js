@@ -11,6 +11,7 @@ export const useAuthStore = () => {
 
     const { VITE_API_URL } = getEnvVariables();
 
+
     const startLogin = async ({correo, contrasena}) => {
         dispatch(onChecking());
         console.log('Check');
@@ -22,8 +23,15 @@ export const useAuthStore = () => {
             credentials: 'include',
           });
 
+          console.log("Response:",response);
+          console.log("Data:", await response.json());
+          
+          
+
           if(response.ok){
             const user = userToken();
+            console.log("UserToken:",user);
+            
             dispatch(onLogin({rol: user.rol, _id: user._id, nombre: user.nombre}))
             Swal.fire({
                 icon: "success",

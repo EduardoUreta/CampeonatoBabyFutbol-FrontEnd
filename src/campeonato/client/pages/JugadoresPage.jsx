@@ -45,7 +45,7 @@ export const JugadoresPage = () => {
                         <div>
                         </div>
                         <div></div>
-                        <div className="mt-2">
+                        <div className="mt-2 mb-2">
                             <input
                                 type="text"
                                 className="form-control"

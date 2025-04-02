@@ -112,10 +112,22 @@ export const useAuthStore = () => {
       }
   };
 
-  const startLogout = () => {
-      Cookies.remove('Bearer', { path: '/' });
+  const startLogout = async() => {
+    try {
+      await fetch(`${VITE_API_URL}/auth/logout`, {
+          method: "DELETE",
+          credentials: "include", 
+      });
+
       localStorage.removeItem('token');
       dispatch(onLogout());
+      Swal.fire({
+        icon: "success",
+        title: "Sesión Cerrada",
+      });
+    } catch (error) {
+        console.error("Error al cerrar sesión:", error);
+    }
   };
 
   return {
